@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://106.12.39.147:3306/test_db?serverTimezone=GMT
-    username: root
-    password: Cs477616*
+    url: jdbc:mysql://xxxx:3306/test_db?serverTimezone=GMT
+    username: xxxx
+    password: xxxx
   thymeleaf:
     cache: false
 
