@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maizi.fund.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.maizi.fund.model.domain.Employee" >
+    <result column="FIRST_NAME" property="firstName" jdbcType="CHAR" />
+    <result column="LAST_NAME" property="lastName" jdbcType="CHAR" />
+    <result column="AGE" property="age" jdbcType="INTEGER" />
+    <result column="SEX" property="sex" jdbcType="CHAR" />
+    <result column="INCOME" property="income" jdbcType="REAL" />
+  </resultMap>
+
+  <select id="selectOne" resultMap="BaseResultMap">
+    select *
+    from employee
+    limit 1
+  </select>
+
+</mapper>

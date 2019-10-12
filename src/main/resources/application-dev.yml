@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.12.39.147:3306/test_db?serverTimezone=GMT
+    username: root
+    password: Cs477616*
+  thymeleaf:
+    cache: false
+
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.maizi.fund.mapper
+  mapper-locations: classpath:mapper/*.xml
+  configLocation: classpath:mybatis-config.xml

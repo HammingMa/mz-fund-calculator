@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>maizi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 5cm;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $('#search-form').submit(function(event){
+                //stop submit the form, we will post it manually.
+                event.preventDefault();
+                fire_ajax_submit();
+            });
+        });
+
+        function fire_ajax_submit(){
+            var search = {};
+            var search_word = $('#search_word').val();
+            alert(search_word);
+
+            $("#btn-search").prop("disabled", true);
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                // url: "/api/search",
+                url: "/mz/emp2/search?search_value=" + search_word,
+                data: JSON.stringify(search),
+                // dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function(data){
+                    var json = "<h4>A</h4><pre>"
+                        + JSON.stringify(data, null, 4) + "</pre>";
+
+                    // $('#feedback').html(json);
+                    $("#feedback").html(data);
+
+                    console.log("SUCCESS : ", data);
+                    $("#btn-search").prop("disabled", false);
+                },
+                error: function(e){
+                    var json = "<h4>Ajax Response</h4><pre>"
+                        + e.responseText + "</pre>";
+                    $('#feedback').html(json);
+
+                    console.log("ERROR : ", e);
+                    $("#btn-search").prop("disabled", false);
+
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="container" style="min-height: 500px">
+    <div class="starter-template">
+        <h1>搜索</h1><br>
+
+        <form class="form-horizontal" id="search-form">
+
+            <div class="row">
+                <div class="form-group form-group-lg col-md-3">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="search_word"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg col-md-4">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">手机号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="search_word_tel"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg col-md-4">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">证件号码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="search_word_card"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" id="bth-search"
+                                class="btn btn-primary btn-lg">查询
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <div id="feedback"></div>
+
+</div>
+
+<!--<div class="container">-->
+<!--    <footer>-->
+<!--        <p>-->
+<!--            © <a >NoNo</a> 2019-->
+<!--        </p>-->
+<!--    </footer>-->
+<!--</div>-->
+
+</body>
+</html>

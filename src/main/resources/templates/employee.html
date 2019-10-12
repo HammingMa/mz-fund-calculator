@@ -1,0 +1,78 @@
+<!--<div class="contentDiv">-->
+<!--    <table class="table table-striped table-hover">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--            <th>FirstName</th>-->
+<!--            <th>ListName</th>-->
+<!--            <th>Age</th>-->
+<!--            <th>Sex</th>-->
+<!--            <th>Income</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+
+<!--        <tbody>-->
+<!--        <tr th:each="employee : ${employeeList}">-->
+<!--            <td th:text="${employee.firstName}"></td>-->
+<!--            <td th:text="${employee.lastName}"></td>-->
+<!--            <td th:text="${employee.age}"></td>-->
+<!--            <td th:text="${employee.sex}"></td>-->
+<!--            <td th:text="${employee.income}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="contentDiv">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>FirstName</th>
+                    <th>ListName</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Income</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.age}"></td>
+                    <td th:text="${employee.sex}"></td>
+                    <td th:text="${employee.income}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="contentDiv">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>FirstName</th>
+                    <th>ListName</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Income</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.age}"></td>
+                    <td th:text="${employee.sex}"></td>
+                    <td th:text="${employee.income}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
