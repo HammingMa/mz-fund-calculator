@@ -48,7 +48,48 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.cloudera/ImpalaJDBC41 -->
+        <dependency>
+            <groupId>com.cloudera</groupId>
+            <artifactId>ImpalaJDBC41</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+
+
+
+        <!-- 开始导入impala jdbc依赖包 -->
+<!--        <dependency>-->
+<!--            <groupId>com.cloudera.impala.jdbc</groupId>-->
+<!--            <artifactId>ImpalaJDBC41</artifactId>-->
+<!--            <version>2.5.30</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
+
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>hodysseusinc</id>-->
+<!--            <name>ody</name>-->
+<!--            <url>http://repo.odysseusinc.com/artifactory/community-libs-release-local/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
+    <repositories>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 
     <build>
         <plugins>

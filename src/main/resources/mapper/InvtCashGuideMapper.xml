@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maizi.fund.mapper.InvtCashGuideMapper" >
+
+    <resultMap id="BaseResultMap" type="com.maizi.fund.model.domain.InvtCashGuideDO" >
+        <result column="real_name" property="realName" jdbcType="CHAR" />
+        <result column="register_time" property="registerTime" jdbcType="CHAR" />
+        <result column="recharge_cnt" property="rechargeCnt" jdbcType="CHAR" />
+        <result column="bi_recharge_sum" property="biRechargeSum" jdbcType="CHAR" />
+        <result column="withdraw_cnt" property="withdrawCnt" jdbcType="CHAR" />
+        <result column="bi_withdraw_sum" property="biWithdrawSum" jdbcType="CHAR" />
+        <result column="bi_seven_balance" property="biSevenBalance" jdbcType="CHAR" />
+        <result column="bi_thirteen_balance" property="biThirteenBalance" jdbcType="CHAR" />
+        <result column="bi_cs_balance" property="biCsBalance" jdbcType="CHAR" />
+        <result column="bi_transfer_loss" property="biTransferLoss" jdbcType="CHAR" />
+        <result column="bi_original_capital" property="biOriginalCapital" jdbcType="CHAR" />
+    </resultMap>
+
+
+<!--    <select id="selectIvt" resultMap="BaseResultMap">-->
+<!--    <select id="selectIvt" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+    <select id="selectIvt" parameterType="java.lang.String" resultType="com.maizi.fund.model.domain.InvtCashGuideDO">
+        SELECT
+        real_name AS realName,
+        register_time AS registerTime,
+        recharge_cnt AS rechargeCnt,
+        bi_recharge_sum AS biRechargeSum,
+        withdraw_cnt AS withdrawCnt,
+        bi_withdraw_sum AS biWithdrawSum,
+        bi_seven_balance AS biSevenBalance,
+        bi_thirteen_balance AS biThirteenBalance,
+        bi_cs_balance AS biCsBalance,
+        bi_transfer_loss AS biTransferLoss,
+        bi_original_capital AS biOriginalCapital
+        FROM dmt.invt_cash_guide
+        WHERE stat_date='2019-10-14'
+        AND bi_debt_capital_sum>0
+        <if test="mobile_num != ''">
+            AND mobile_num=#{mobile_num}
+        </if>
+        <if test="id_num != ''">
+            AND id_num=#{id_num}
+        </if>
+    </select>
+
+    <select id="selectRechargeDetail" parameterType="java.lang.String" resultType="com.maizi.fund.model.domain.RechargeDetailDO">
+        SELECT
+        user_name AS userName,
+        recharge_cnt AS rechargeCnt,
+        recharge_time AS rechargeTime,
+        recharge_amount AS rechargeAmount
+        FROM dmt.recharhe_detail
+        WHERE 1=1
+        <if test="mobile_num != ''">
+            AND mobile_num=#{mobile_num}
+        </if>
+        <if test="id_num != ''">
+            AND id_num=#{id_num}
+        </if>
+        ORDER BY recharge_cnt
+    </select>
+
+
+    <select id="selectWithdrawDetail" parameterType="java.lang.String" resultType="com.maizi.fund.model.domain.WithdrawDetailDO">
+        SELECT
+        withdraw_cnt AS withdrawCnt,
+        withdraw_type AS withdrawType,
+        withdraw_time AS withdrawTime,
+        withdraw_amount AS withdrawAmount
+        FROM dmt.withdraw_detail
+        WHERE 1=1
+        <if test="mobile_num != ''">
+            AND mobile_num=#{mobile_num}
+        </if>
+        <if test="id_num != ''">
+            AND id_num=#{id_num}
+        </if>
+        ORDER BY withdraw_time ASC,withdraw_cnt DESC
+    </select>
+
+</mapper>

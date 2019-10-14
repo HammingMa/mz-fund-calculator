@@ -1,6 +1,7 @@
 package com.maizi.fund.mapper;
 
 import com.maizi.fund.model.domain.Employee;
+import com.maizi.fund.model.domain.ImpalaDemo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -30,6 +31,9 @@ public interface EmployeeMapper {
     List<Employee> selectAll();
 
 
+    @Select("select * from msc.abc1234;")
+    List<ImpalaDemo> selectImpala();
+
     /**
      * 根据 SEX 获取数据
      * @param searchValue
@@ -37,4 +41,6 @@ public interface EmployeeMapper {
      */
     @Select("select * from employee where SEX=#{search_value};")
     List<Employee> selectById(@Param("search_value") String searchValue);
+
+
 }

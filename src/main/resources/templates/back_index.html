@@ -29,18 +29,14 @@
         function fire_ajax_submit(){
             var search = {};
             var search_word = $('#search_word').val();
-
-            var search_word_tel = $('#search_word_tel').val();
-            var id_card = $('#id_card').val();
-
-            // alert(search_word_tel);
+            // alert(search_word);
 
             $("#btn-search").prop("disabled", true);
             $.ajax({
                 type: 'POST',
                 contentType: "application/json",
                 // url: "/api/search",
-                url: "/mz/fund/search?mobile_num=" + search_word_tel + "&id_num=" + id_card,
+                url: "/mz/emp2/search?search_value=" + search_word,
                 data: JSON.stringify(search),
                 // dataType: 'json',
                 cache: false,
@@ -73,9 +69,8 @@
 
 <div class="container" style="min-height: 500px">
 <!--    <div class="starter-template">-->
-<!--        <h2>搜索</h2><br>-->
-        <br>
-        <br>
+        <h2>搜索</h2><br>
+
         <form class="form-horizontal" id="search-form">
 
             <div class="row">
@@ -107,7 +102,7 @@
 <!--                        <label class="col-md-3 control-label">证件号码</label>-->
                         <a>证件号码</a>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="id_card"/>
+                            <input type="text" class="form-control" id="search_word_card"/>
                         </div>
                     </div>
                 </div>

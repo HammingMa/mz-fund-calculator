@@ -2,6 +2,7 @@ package com.maizi.fund.service.impl;
 
 import com.maizi.fund.mapper.EmployeeMapper;
 import com.maizi.fund.model.domain.Employee;
+import com.maizi.fund.model.domain.ImpalaDemo;
 import com.maizi.fund.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee selectOne() {
         return employeeMapper.selectOne();
+    }
+
+    @Override
+    public List<ImpalaDemo> selectImpala() {
+        return employeeMapper.selectImpala();
     }
 }

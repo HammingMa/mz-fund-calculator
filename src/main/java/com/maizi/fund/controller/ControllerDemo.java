@@ -1,6 +1,7 @@
 package com.maizi.fund.controller;
 
 import com.maizi.fund.model.domain.Employee;
+import com.maizi.fund.model.domain.ImpalaDemo;
 import com.maizi.fund.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2019/10/11 11:02 上午
  */
 @Controller
-@RequestMapping("/mz")
+@RequestMapping("/test")
 public class ControllerDemo {
 
     @Autowired
@@ -37,12 +38,19 @@ public class ControllerDemo {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex(ModelMap map) {
-        List<Employee> employeeList = employeeService.selectAll();
+//        List<Employee> employeeList = employeeService.selectAll();
+//
+//        map.addAttribute("employeeList", employeeList);
+//
+//        for(Employee employee : employeeList) {
+//            System.out.println(employee);
+//        }
 
-        map.addAttribute("employeeList", employeeList);
 
-        for(Employee employee : employeeList) {
-            System.out.println(employee);
+        List<ImpalaDemo> impalaDemos = employeeService.selectImpala();
+
+        for (ImpalaDemo impalaDemo : impalaDemos) {
+            System.out.println(impalaDemo);
         }
         return "index";
     }
