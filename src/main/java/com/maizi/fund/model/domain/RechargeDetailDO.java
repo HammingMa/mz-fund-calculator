@@ -1,5 +1,7 @@
 package com.maizi.fund.model.domain;
 
+import com.maizi.fund.utils.NumberFormatUtils;
+
 import java.util.Objects;
 
 /**
@@ -44,7 +46,7 @@ public class RechargeDetailDO {
     }
 
     public void setRechargeAmount(String rechargeAmount) {
-        this.rechargeAmount = rechargeAmount;
+        this.rechargeAmount = NumberFormatUtils.getInstance().formatNum(rechargeAmount);
     }
 
 

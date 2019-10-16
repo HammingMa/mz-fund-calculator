@@ -1,5 +1,7 @@
 package com.maizi.fund.model.domain;
 
+import com.maizi.fund.utils.NumberFormatUtils;
+
 import java.util.Objects;
 
 /**
@@ -41,13 +43,57 @@ public class InvtCashGuideDO {
     // 原始本金
     private String biOriginalCapital;
 
+    // 身份证号
+    private String idNum;
+
+    // 手机号
+    private String mobileNum;
+
+    // 匹配债权金额
+    private String biDebtCapitalSum;
+
+    // 匹配债权金额 * 0.8
+    private String biDebtCapitalSumEight;
+
+    public String getBiDebtCapitalSumEight() {
+        return biDebtCapitalSumEight;
+    }
+
+    public void setBiDebtCapitalSumEight(String biDebtCapitalSumEight) {
+        this.biDebtCapitalSumEight = NumberFormatUtils.getInstance().formatNum(biDebtCapitalSumEight);
+    }
+
+    public String getBiDebtCapitalSum() {
+        return biDebtCapitalSum;
+    }
+
+    public void setBiDebtCapitalSum(String biDebtCapitalSum) {
+        this.biDebtCapitalSum = NumberFormatUtils.getInstance().formatNum(biDebtCapitalSum);
+    }
+
+
+    public String getMobileNum() {
+        return mobileNum;
+    }
+
+    public void setMobileNum(String mobileNum) {
+        this.mobileNum = mobileNum.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");;
+    }
+
+    public String getIdNum() {
+        return idNum;
+    }
+
+    public void setIdNum(String idNum) {
+        this.idNum = idNum.replaceAll("(\\d{6})\\d{8}(\\d{4})", "$1********$2");;
+    }
 
     public String getRealName() {
         return realName;
     }
 
     public void setRealName(String realName) {
-        this.realName = realName;
+        this.realName = NumberFormatUtils.getInstance().replaceNameX(realName);
     }
 
     public String getRegisterTime() {
@@ -71,7 +117,11 @@ public class InvtCashGuideDO {
     }
 
     public void setBiRechargeSum(String biRechargeSum) {
-        this.biRechargeSum = biRechargeSum;
+
+        // 格式化 充值金额
+        String rs = NumberFormatUtils.getInstance().formatNum(biRechargeSum);
+//        this.biRechargeSum = biRechargeSum;
+        this.biRechargeSum = rs;
     }
 
     public String getWithdrawCnt() {
@@ -79,6 +129,7 @@ public class InvtCashGuideDO {
     }
 
     public void setWithdrawCnt(String withdrawCnt) {
+
         this.withdrawCnt = withdrawCnt;
     }
 
@@ -87,7 +138,8 @@ public class InvtCashGuideDO {
     }
 
     public void setBiWithdrawSum(String biWithdrawSum) {
-        this.biWithdrawSum = biWithdrawSum;
+        // 格式化 提现总额
+        this.biWithdrawSum = NumberFormatUtils.getInstance().formatNum(biWithdrawSum);
     }
 
     public String getBiSevenBalance() {
@@ -95,7 +147,8 @@ public class InvtCashGuideDO {
     }
 
     public void setBiSevenBalance(String biSevenBalance) {
-        this.biSevenBalance = biSevenBalance;
+        // 当前余额
+        this.biSevenBalance = NumberFormatUtils.getInstance().formatNum(biSevenBalance);
     }
 
     public String getBiThirteenBalance() {
@@ -103,19 +156,28 @@ public class InvtCashGuideDO {
     }
 
     public void setBiThirteenBalance(String biThirteenBalance) {
-        this.biThirteenBalance = biThirteenBalance;
+        // 当前精选余额
+        this.biThirteenBalance = NumberFormatUtils.getInstance().formatNum(biThirteenBalance);
     }
 
     public String getBiCsBalance() {
+        // 财神原账户
+        if (biCsBalance == null) {
+            return "0";
+        }
         return biCsBalance;
     }
 
     public void setBiCsBalance(String biCsBalance) {
-        this.biCsBalance = biCsBalance;
+        this.biCsBalance = NumberFormatUtils.getInstance().formatNum(biCsBalance);
     }
 
     public String getBiTransferLoss() {
-        return biTransferLoss;
+        // 财神原账户
+        if (biTransferLoss == null) {
+            return "0";
+        }
+        return NumberFormatUtils.getInstance().formatNum(biTransferLoss);
     }
 
     public void setBiTransferLoss(String biTransferLoss) {
@@ -127,7 +189,7 @@ public class InvtCashGuideDO {
     }
 
     public void setBiOriginalCapital(String biOriginalCapital) {
-        this.biOriginalCapital = biOriginalCapital;
+        this.biOriginalCapital = NumberFormatUtils.getInstance().formatNum(biOriginalCapital);
     }
 
     @Override
@@ -145,17 +207,22 @@ public class InvtCashGuideDO {
                 Objects.equals(biThirteenBalance, that.biThirteenBalance) &&
                 Objects.equals(biCsBalance, that.biCsBalance) &&
                 Objects.equals(biTransferLoss, that.biTransferLoss) &&
-                Objects.equals(biOriginalCapital, that.biOriginalCapital);
+                Objects.equals(biOriginalCapital, that.biOriginalCapital) &&
+                Objects.equals(idNum, that.idNum) &&
+                Objects.equals(mobileNum, that.mobileNum) &&
+                Objects.equals(biDebtCapitalSum, that.biDebtCapitalSum) &&
+                Objects.equals(biDebtCapitalSumEight, that.biDebtCapitalSumEight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(realName, registerTime, rechargeCnt, biRechargeSum, withdrawCnt, biWithdrawSum, biSevenBalance, biThirteenBalance, biCsBalance, biTransferLoss, biOriginalCapital);
+        return Objects.hash(realName, registerTime, rechargeCnt, biRechargeSum, withdrawCnt, biWithdrawSum, biSevenBalance, biThirteenBalance, biCsBalance, biTransferLoss, biOriginalCapital, idNum, mobileNum, biDebtCapitalSum, biDebtCapitalSumEight);
     }
+
 
     @Override
     public String toString() {
-        return "InvtCashGuide{" +
+        return "InvtCashGuideDO{" +
                 "realName='" + realName + '\'' +
                 ", registerTime='" + registerTime + '\'' +
                 ", rechargeCnt='" + rechargeCnt + '\'' +
@@ -167,6 +234,10 @@ public class InvtCashGuideDO {
                 ", biCsBalance='" + biCsBalance + '\'' +
                 ", biTransferLoss='" + biTransferLoss + '\'' +
                 ", biOriginalCapital='" + biOriginalCapital + '\'' +
+                ", idNum='" + idNum + '\'' +
+                ", mobileNum='" + mobileNum + '\'' +
+                ", biDebtCapitalSum='" + biDebtCapitalSum + '\'' +
+                ", biDebtCapitalSumEight='" + biDebtCapitalSumEight + '\'' +
                 '}';
     }
 }

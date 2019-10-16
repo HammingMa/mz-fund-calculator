@@ -27,11 +27,11 @@ public interface EmployeeMapper {
      * 获取所有
      * @return Employee
      */
-    @Select("select * from employee;")
+//    @Select("select * from employee;")
     List<Employee> selectAll();
 
 
-    @Select("select * from msc.abc1234;")
+//    @Select("select * from msc.abc1234;")
     List<ImpalaDemo> selectImpala();
 
     /**
@@ -39,7 +39,7 @@ public interface EmployeeMapper {
      * @param searchValue
      * @return Employee
      */
-    @Select("select * from employee where SEX=#{search_value};")
+//    @Select("select * from employee where SEX=#{search_value};")
     List<Employee> selectById(@Param("search_value") String searchValue);
 
 

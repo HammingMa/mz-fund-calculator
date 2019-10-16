@@ -9,10 +9,10 @@
     <result column="INCOME" property="income" jdbcType="REAL" />
   </resultMap>
 
-  <select id="selectOne" resultMap="BaseResultMap">
-    select *
-    from employee
-    limit 1
-  </select>
+<!--  <select id="selectOne" resultMap="BaseResultMap">-->
+<!--    select *-->
+<!--    from employee-->
+<!--    limit 1-->
+<!--  </select>-->
 
 </mapper>

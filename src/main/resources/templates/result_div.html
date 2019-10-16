@@ -1,119 +1,59 @@
-<!--<div class="contentDiv">-->
-<!--    <table class="table table-striped table-hover">-->
-<!--        <thead class="thead-light">-->
-<!--        <tr>-->
-<!--            <th>客户姓名</th>-->
-<!--            <th>注册时间</th>-->
-<!--            <th>充值笔数</th>-->
-<!--            <th>充值金额</th>-->
-<!--            <th>提现笔数</th>-->
-<!--            <th>提现总额</th>-->
-<!--            <th>当前余额</th>-->
-<!--            <th>当前精选余额</th>-->
-<!--            <th>财神原账户</th>-->
-<!--            <th>转让折扣损失加总</th>-->
-<!--            <th>原始本金</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-
-<!--        <tbody>-->
-<!--        <tr th:each="invtCashGuide : ${invtCashGuideDO}">-->
-<!--            <td th:text="${invtCashGuide.realName}"></td>-->
-<!--            <td th:text="${invtCashGuide.registerTime}"></td>-->
-<!--            <td th:text="${invtCashGuide.rechargeCnt}"></td>-->
-<!--            <td th:text="${invtCashGuide.biRechargeSum}"></td>-->
-<!--            <td th:text="${invtCashGuide.withdrawCnt}"></td>-->
-<!--            <td th:text="${invtCashGuide.biWithdrawSum}"></td>-->
-<!--            <td th:text="${invtCashGuide.biSevenBalance}"></td>-->
-<!--            <td th:text="${invtCashGuide.biThirteenBalance}"></td>-->
-<!--            <td th:text="${invtCashGuide.biCsBalance}"></td>-->
-<!--            <td th:text="${invtCashGuide.biTransferLoss}"></td>-->
-<!--            <td th:text="${invtCashGuide.biOriginalCapital}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
-
-<!--            <th>客户姓名</th>-->
-<!--            <th>注册时间</th>-->
-<!--            <th>充值笔数</th>-->
-<!--            <th>充值金额</th>-->
-<!--            <th>提现笔数</th>-->
-<!--            <th>提现总额</th>-->
-<!--            <th>当前余额</th>-->
-<!--            <th>当前精选余额</th>-->
-<!--            <th>财神原账户</th>-->
-<!--            <th>转让折扣损失加总</th>-->
-<!--            <th>原始本金</th>-->
+<!--<a class="margin"  th:text="'客户姓名：' + ${invtCashGuideDO.realName}"></a>-->
+<!--<a class="margin" th:text="'注册时间：' + ${invtCashGuideDO.registerTime}"></a>-->
+<!--<a class="margin" th:text="'充值笔数：' + ${invtCashGuideDO.rechargeCnt}"></a><br/>-->
+<!--<a class="margin2" th:text="'充值金额：' + ${invtCashGuideDO.biRechargeSum}"></a>-->
+<!--<a class="margin2" th:text="'提现笔数：' + ${invtCashGuideDO.withdrawCnt}"></a>-->
+<!--<a id="mm2" class="margin2" th:text="'提现总额：' + ${invtCashGuideDO.biWithdrawSum}"></a><br/>-->
+<!--<a class="margin3" th:text="'当前余额：' + ${invtCashGuideDO.biSevenBalance}"></a>-->
+<!--<a id="mm3" class="margin3" th:text="'当前精选余额：' + ${invtCashGuideDO.biThirteenBalance}"></a>-->
+<!--<a id="mm4" class="margin3" th:text="'财神原账户：' + ${invtCashGuideDO.biCsBalance}"></a><br/>-->
+<!--<a class="margin" th:text="'转让折扣损失加总：' + ${invtCashGuideDO.biTransferLoss}"></a><br/>-->
+<!--<h1 id="mm5" align="center" th:text="'原始本金：' + ${invtCashGuideDO.biOriginalCapital}"></h1>-->
 <style>
-    a.margin
-    {
-        /*margin-top:100px;*/
-        /*margin-bottom:100px;*/
-        margin-right:190px;
-        margin-left:0;
-    }
-
-    a.margin2
-    {
-        /*margin-top:100px;*/
-        /*margin-bottom:100px;*/
-        margin-right:100px;
-        margin-left:0;
-    }
-
-    a.margin3
-    {
-        /*margin-top:100px;*/
-        /*margin-bottom:100px;*/
-        margin-right:100px;
-        margin-left:0;
-    }
-
-    a#mm2
-    {
-        margin-left:238px;
-    }
-
-    a#mm3
-    {
-        margin-left:8px;
-    }
-
-    a#mm4
-    {
-        margin-left:99px;
-    }
-
-    h1#mm5
-    {
-        margin-top:10px;
-        margin-bottom:10px;
+    .userinfo div {
+        padding:0 !important;
     }
 </style>
-<a class="margin"  th:text="'客户姓名：' + ${invtCashGuideDO.realName}"></a>
-<a class="margin" th:text="'注册时间：' + ${invtCashGuideDO.registerTime}"></a>
-<a class="margin" th:text="'充值笔数：' + ${invtCashGuideDO.rechargeCnt}"></a><br/>
-<a class="margin2" th:text="'充值金额：' + ${invtCashGuideDO.biRechargeSum}"></a>
-<a class="margin2" th:text="'提现笔数：' + ${invtCashGuideDO.withdrawCnt}"></a>
-<a id="mm2" class="margin2" th:text="'提现总额：' + ${invtCashGuideDO.biWithdrawSum}"></a><br/>
-<a class="margin3" th:text="'当前余额：' + ${invtCashGuideDO.biSevenBalance}"></a>
-<a id="mm3" class="margin3" th:text="'当前精选余额：' + ${invtCashGuideDO.biThirteenBalance}"></a>
-<a id="mm4" class="margin3" th:text="'财神原账户：' + ${invtCashGuideDO.biCsBalance}"></a><br/>
-<a class="margin" th:text="'转让折扣损失加总：' + ${invtCashGuideDO.biTransferLoss}"></a><br/>
-<h1 id="mm5" align="center" th:text="'原始本金：' + ${invtCashGuideDO.biOriginalCapital}"></h1>
+
+
+<div class="row userinfo" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="col-md-3"><a   th:text="'客户姓名：' + ${invtCashGuideDO.realName}"></a ></div>
+    <div class="col-md-3"><a   th:text="'证件号码：' + ${invtCashGuideDO.idNum}"></a ></div>
+    <div class="col-md-3"><a   th:text="'手机号：' + ${invtCashGuideDO.mobileNum}"></a ></div>
+    <div class="col-md-3"><a  th:text="'当前余额：' + ${invtCashGuideDO.biSevenBalance} + ' 元'"></a ></div>
+</div>
+
+<div class="row userinfo" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="col-md-3"><a  th:text="'充值笔数：' + ${invtCashGuideDO.rechargeCnt}"></a ><br/></div>
+    <div class="col-md-3"><a  th:text="'充值金额：' + ${invtCashGuideDO.biRechargeSum} + ' 元'"></a ></div>
+    <div class="col-md-3"><a  th:text="'待匹配债权金额：' + ${invtCashGuideDO.biThirteenBalance} + ' 元'"></a ></div>
+    <div class="col-md-3"><a th:text="'注册时间：' + ${invtCashGuideDO.registerTime}"></a ></div>
+</div>
+
+<div class="row userinfo">
+    <div class="col-md-3"><a  th:text="'提现笔数：' + ${invtCashGuideDO.withdrawCnt}"></a ></div>
+    <div class="col-md-3"><a  th:text="'提现总额：' + ${invtCashGuideDO.biWithdrawSum} + ' 元'"></a ></div>
+    <div class="col-md-3"><a  th:text="'财神原账户：' + ${invtCashGuideDO.biCsBalance} + ' 元'"></a ></div>
+    <div class="col-md-3"><a  th:text="'债转折扣让利总额：' + ${invtCashGuideDO.biTransferLoss} + ' 元'"></a ></div>
+</div>
+<div class="row userinfo">
+    <div class="col-md-3"><a  th:text="'剩余充值本金：' + ${invtCashGuideDO.biOriginalCapital} + ' 元'"></a ></div>
+    <div class="col-md-3"><a  th:text="'匹配债权金额：' + ${invtCashGuideDO.biDebtCapitalSum} + ' 元'"></a ></div>
+    <div class="col-md-3"><a  th:text="'匹配债权金额(八折)：' + ${invtCashGuideDO.biDebtCapitalSumEight} + ' 元'"></a ></div>
+<!--    <h1 align="center" th:text="'剩余充值本金：' + ${invtCashGuideDO.biOriginalCapital} + ' 元'"></h1>-->
+</div>
 <hr>
+
 <div class="row">
     <div class="col-md-6">
         <div class="contentDiv">
             <h4 align="center">历史充值明细</h4>
             <table class="table table-striped table-hover">
-                <thead class="thead-dark">
+                <thead style="background-color: #ebac3c">
                 <tr>
-                    <th>充值笔数</th>
-                    <th>充值时间</th>
-                    <th>充值金额</th>
+                    <th style="color: aliceblue">充值笔数</th>
+                    <th style="color: aliceblue">充值时间</th>
+                    <th style="color: aliceblue">充值金额(元)</th>
                 </tr>
                 </thead>
 
@@ -121,7 +61,7 @@
                 <tr th:each="rechargeDetailDo : ${rechargeDetailDoList}">
                     <td th:text="${rechargeDetailDo.rechargeCnt}"></td>
                     <td th:text="${rechargeDetailDo.rechargeTime}"></td>
-                    <td th:text="${rechargeDetailDo.rechargeAmount}"></td>
+                    <td align="right" th:text="${rechargeDetailDo.rechargeAmount}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -132,12 +72,12 @@
         <div class="contentDiv">
             <h4 align="center">历史提现明细</h4>
             <table class="table table-striped table-hover">
-                <thead class="thead-dark">
+                <thead style="background-color: #ebac3c">
                 <tr>
-                    <th>提现笔数</th>
-                    <th>类型</th>
-                    <th>提现时间</th>
-                    <th>提现金额</th>
+                    <th style="color: aliceblue">提现笔数</th>
+                    <th style="color: aliceblue">类型</th>
+                    <th style="color: aliceblue">提现时间</th>
+                    <th style="color: aliceblue">提现金额(元)</th>
                 </tr>
                 </thead>
 
@@ -146,7 +86,7 @@
                     <td th:text="${withdrawDetailDo.withdrawCnt}"></td>
                     <td th:text="${withdrawDetailDo.withdrawType}"></td>
                     <td th:text="${withdrawDetailDo.withdrawTime}"></td>
-                    <td th:text="${withdrawDetailDo.withdrawAmount}"></td>
+                    <td align="right" th:text="${withdrawDetailDo.withdrawAmount}"></td>
                 </tr>
                 </tbody>
             </table>

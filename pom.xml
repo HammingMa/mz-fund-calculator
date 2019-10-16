@@ -55,6 +55,9 @@
             <groupId>com.cloudera</groupId>
             <artifactId>ImpalaJDBC41</artifactId>
             <version>2.6.3</version>
+
+            <scope>system</scope>
+            <systemPath>/Users/saicao/.m2/repository/com/cloudera/ImpalaJDBC41/2.6.3/ImpalaJDBC41-2.6.3.jar</systemPath>
         </dependency>
 
 
@@ -77,18 +80,18 @@
 <!--        </repository>-->
 <!--    </repositories>-->
 
-    <repositories>
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>cloudera</id>-->
+<!--            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
 
     <build>
@@ -96,6 +99,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>

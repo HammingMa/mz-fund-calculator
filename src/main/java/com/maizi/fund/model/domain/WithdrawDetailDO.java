@@ -1,5 +1,7 @@
 package com.maizi.fund.model.domain;
 
+import com.maizi.fund.utils.NumberFormatUtils;
+
 import java.util.Objects;
 
 /**
@@ -43,7 +45,7 @@ public class WithdrawDetailDO {
     }
 
     public void setWithdrawAmount(String withdrawAmount) {
-        this.withdrawAmount = withdrawAmount;
+        this.withdrawAmount = NumberFormatUtils.getInstance().formatNum(withdrawAmount);
     }
 
     @Override

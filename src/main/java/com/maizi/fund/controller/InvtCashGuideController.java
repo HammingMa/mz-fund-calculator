@@ -25,15 +25,11 @@ public class InvtCashGuideController {
     @Autowired
     private InvtCashGuideService invtCashGuideService;
 
-
-
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex() {
 
 //        InvtCashGuideDO invtCashGuideDO = invtCashGuideService.selectIvt(mobileNum);
-//
 //        System.out.println(invtCashGuideDO);
-
         return "index";
     }
 
@@ -43,14 +39,13 @@ public class InvtCashGuideController {
                                   @RequestParam(name = "mobile_num", required = true) String mobileNum,
                                   @RequestParam(name = "id_num", required = true) String idNum) {
 
-        System.out.println("-444666----" + mobileNum);
-        System.out.println("-444888----" + idNum);
-
-        System.out.println("".equals(idNum));
-
-        System.out.println(idNum == null);
-
         InvtCashGuideDO invtCashGuideDO = invtCashGuideService.selectIvt(mobileNum, idNum);
+
+        System.out.println("44444" + invtCashGuideDO);
+
+        if (invtCashGuideDO == null) {
+            return "no_result";
+        }
 
         List<RechargeDetailDO> rechargeDetailDoList = invtCashGuideService.selectRechargeDetail(mobileNum, idNum);
         List<WithdrawDetailDO> withdrawDetailDoList = invtCashGuideService.selectWithdrawDetail(mobileNum, idNum);
@@ -60,7 +55,6 @@ public class InvtCashGuideController {
         map.addAttribute("withdrawDetailDoList", withdrawDetailDoList);
 
         System.out.println(invtCashGuideDO);
-
         return "result_div";
     }
 }

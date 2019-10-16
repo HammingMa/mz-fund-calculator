@@ -20,9 +20,23 @@
     <script>
         $(document).ready(function(){
             $('#search-form').submit(function(event){
+
+                var search_word_tel_length = $.trim($('#search_word_tel').val()).length;
+                var id_card_length = $.trim($('#id_card').val()).length;
+
+                if (search_word_tel_length===0 && id_card_length===0) {
+                    alert("请输入用户名手机号或身份证号");
+                    return false;
+                }
+
                 //stop submit the form, we will post it manually.
                 event.preventDefault();
+
+                // 设置变灰按钮, 防止多次提交
+                $('#bth-search').attr("disabled", "false");
                 fire_ajax_submit();
+                // $('#bth-search').attr("disabled", false);
+                // $('#bth-search').attr("disabled","false");
             });
         });
 
@@ -34,13 +48,15 @@
             var id_card = $('#id_card').val();
 
             // alert(search_word_tel);
-
-            $("#btn-search").prop("disabled", true);
             $.ajax({
                 type: 'POST',
                 contentType: "application/json",
                 // url: "/api/search",
                 url: "/mz/fund/search?mobile_num=" + search_word_tel + "&id_num=" + id_card,
+                beforeSend: function(){
+                    $('#bth-search').text('查询中···');
+                    // $("#btn-search").prop("disabled", false);
+                },
                 data: JSON.stringify(search),
                 // dataType: 'json',
                 cache: false,
@@ -51,26 +67,71 @@
 
                     // $('#feedback').html(json);
                     $("#feedback").html(data);
+                    $('#bth-search').text('查询');
+                    $("#bth-search").removeAttr("disabled");
+                    // console.log("SUCCESS : ", data);
+                    // $("#btn-search").prop("disabled", false);
 
-                    console.log("SUCCESS : ", data);
-                    $("#btn-search").prop("disabled", false);
                 },
                 error: function(e){
                     var json = "<h4>Ajax Response</h4><pre>"
                         + e.responseText + "</pre>";
+
                     $('#feedback').html(json);
 
+                    $('#bth-search').text('查询');
+                    $("#bth-search").removeAttr("disabled");
                     console.log("ERROR : ", e);
                     $("#btn-search").prop("disabled", false);
 
                 }
             })
         }
+        // function fire_ajax_submit(){
+        //     var search = {};
+        //     var search_word = $('#search_word').val();
+        //
+        //     var search_word_tel = $('#search_word_tel').val();
+        //     var id_card = $('#id_card').val();
+        //
+        //     // alert(search_word_tel);
+        //
+        //     $("#btn-search").prop("disabled", true);
+        //     $.ajax({
+        //         type: 'POST',
+        //         contentType: "application/json",
+        //         // url: "/api/search",
+        //         url: "/mz/fund/search?mobile_num=" + search_word_tel + "&id_num=" + id_card,
+        //         data: JSON.stringify(search),
+        //         // dataType: 'json',
+        //         cache: false,
+        //         timeout: 600000,
+        //         success: function(data){
+        //             var json = "<h4>A</h4><pre>"
+        //                 + JSON.stringify(data, null, 4) + "</pre>";
+        //
+        //             // $('#feedback').html(json);
+        //             $("#feedback").html(data);
+        //
+        //             console.log("SUCCESS : ", data);
+        //             $("#btn-search").prop("disabled", false);
+        //         },
+        //         error: function(e){
+        //             var json = "<h4>Ajax Response</h4><pre>"
+        //                 + e.responseText + "</pre>";
+        //             $('#feedback').html(json);
+        //
+        //             console.log("ERROR : ", e);
+        //             $("#btn-search").prop("disabled", false);
+        //
+        //         }
+        //     })
+        // }
     </script>
 </head>
 
 <body>
-
+<!--<img th:src="@{/images/mz.png}" width="190px" height="70px"/>-->
 <div class="container" style="min-height: 500px">
 <!--    <div class="starter-template">-->
 <!--        <h2>搜索</h2><br>-->
@@ -80,9 +141,8 @@
 
             <div class="row">
 <!--                <div class="form-group form-group-lg col-md-3">-->
-                <div class="container col-md-3">
+                <div class="container col-md-4">
                     <div class="row">
-<!--                        <label class="col-md-3 control-label">用户名</label>-->
                         <a>用户名</a>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="search_word"/>
@@ -91,7 +151,7 @@
                 </div>
 
 <!--                <div class="form-group form-group-lg col-md-4">-->
-                <div class="container col-md-4">
+                <div class="container col-md-3">
                     <div class="row">
 <!--                        <label class="col-md-3 control-label">手机号</label>-->
                         <a>手机号</a>
@@ -112,20 +172,11 @@
                     </div>
                 </div>
 
-<!--                <div class="form-group col-md-1">-->
                 <div class="container col-md-1">
-<!--                    <div class="col-sm-offset-2 col-sm-10">-->
-<!--                        <button type="submit" id="bth-search"-->
-<!--                                class="btn btn-primary btn-lg">查询-->
-<!--                        </button>-->
-<!--                    </div>-->
-
                     <button type="submit" id="bth-search"
                             class="btn btn-primary">查询
                     </button>
-
                 </div>
-
             </div>
         </form>
 
@@ -135,14 +186,6 @@
     <div id="feedback"></div>
 
 </div>
-
-<!--<div class="container">-->
-<!--    <footer>-->
-<!--        <p>-->
-<!--            © <a >NoNo</a> 2019-->
-<!--        </p>-->
-<!--    </footer>-->
-<!--</div>-->
 
 </body>
 </html>

@@ -31,10 +31,16 @@
         bi_thirteen_balance AS biThirteenBalance,
         bi_cs_balance AS biCsBalance,
         bi_transfer_loss AS biTransferLoss,
-        bi_original_capital AS biOriginalCapital
-        FROM dmt.invt_cash_guide
-        WHERE stat_date='2019-10-14'
-        AND bi_debt_capital_sum>0
+        bi_original_capital AS biOriginalCapital,
+        id_num AS idNum,
+        mobile_num AS mobileNum,
+        bi_debt_capital_sum AS biDebtCapitalSum,
+        bi_debt_capital_sum * 0.8 AS biDebtCapitalSumEight
+--         FROM dmt.invt_cash_guide
+--         WHERE stat_date='2019-10-14'
+--         AND bi_debt_capital_sum>0
+        FROM dmt.invt_cash_guide_dt a INNER JOIN (SELECT MAX(stat_date) AS stat_date FROM dmt.invt_cash_guide_dt ) b
+        on a.stat_date=b.stat_date
         <if test="mobile_num != ''">
             AND mobile_num=#{mobile_num}
         </if>

@@ -23,7 +23,11 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
 
     @Override
     public InvtCashGuideDO selectIvt(String mobileNum, String idNum) {
-        return invtCashGuideMapper.selectIvt(mobileNum, idNum);
+
+        InvtCashGuideDO invtCashGuideDO = invtCashGuideMapper.selectIvt(mobileNum, idNum);
+
+        System.out.println("2229999" + invtCashGuideDO);
+        return invtCashGuideDO;
     }
 
     @Override
