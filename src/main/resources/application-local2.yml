@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.cloudera.impala.jdbc41.Driver
+    url: jdbc:impala://172.16.2.149:21051/rt;AuthMech=3;UID=caochunjin;PWD=;UseSasl=0
+    username: caochunjin
+    password: caochunjin
+  thymeleaf:
+    cache: false
+
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.maizi.fund.mapper
+  mapper-locations: classpath:mapper/*.xml
+  configLocation: classpath:mybatis-config.xml

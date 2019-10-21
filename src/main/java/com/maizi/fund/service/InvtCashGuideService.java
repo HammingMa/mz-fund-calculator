@@ -4,6 +4,7 @@ import com.maizi.fund.model.domain.InvtCashGuideDO;
 import com.maizi.fund.model.domain.RechargeDetailDO;
 import com.maizi.fund.model.domain.WithdrawDetailDO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface InvtCashGuideService {
 
     List<WithdrawDetailDO> selectWithdrawDetail(String mobileNum,
                                                 String idNum);
+
+    HSSFWorkbook createAllInfoExcel(String mobileNum, String idNum);
 }

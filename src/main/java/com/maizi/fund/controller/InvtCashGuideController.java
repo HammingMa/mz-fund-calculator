@@ -3,14 +3,16 @@ package com.maizi.fund.controller;
 import com.maizi.fund.model.domain.*;
 import com.maizi.fund.service.InvtCashGuideService;
 import org.apache.ibatis.jdbc.Null;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -21,6 +23,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/mz")
 public class InvtCashGuideController {
+
+
+    @Autowired
+    private HttpServletResponse response;
+
 
     @Autowired
     private InvtCashGuideService invtCashGuideService;
@@ -56,5 +63,40 @@ public class InvtCashGuideController {
 
         System.out.println(invtCashGuideDO);
         return "result_div";
+    }
+
+    @GetMapping("/fund/download")
+    @ResponseBody
+    public String getDownloadExcel(ModelMap map,
+                                   @RequestParam(name = "mobile_num", required = true) String mobileNum,
+                                   @RequestParam(name = "id_num", required = true) String idNum) {
+
+        HSSFWorkbook allInfoExcel = invtCashGuideService.createAllInfoExcel(mobileNum, idNum);
+
+        String fileName = mobileNum.isEmpty()?idNum:mobileNum;
+
+
+        ServletOutputStream out = null;
+        try {
+
+            out = response.getOutputStream();
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName+".xls", "UTF-8"));
+            response.setContentType("application/msexcel;charset=UTF-8");
+
+            allInfoExcel.write(out);
+            out.flush();
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (out != null) {
+
+                    out.close();
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        return "download";
     }
 }

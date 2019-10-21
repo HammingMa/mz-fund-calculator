@@ -13,8 +13,42 @@
     .userinfo div {
         padding:0 !important;
     }
+
+    #bth-download {
+        /*padding:2px;*/
+        float:right;
+        margin-right:25px;
+    }
 </style>
 
+<script>
+    function download(){
+
+        $('#bth-download').text('下载中···');
+        $("#bth-download").prop("disabled", true);
+
+        var search = {};
+        var search_word = $('#search_word').val();
+
+        var search_word_tel = $('#search_word_tel').val();
+        var id_card = $('#id_card').val();
+        var link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = "/mz/fund/download?mobile_num=" + search_word_tel + "&id_num=" + id_card
+        link.setAttribute('id', 'downloadLink')
+        link.setAttribute('download', 'aa')
+        document.body.appendChild(link)
+        link.click()
+        var objLink = document.getElementById('downloadLink')
+        document.body.removeChild(objLink)
+        setTimeout(function() {
+            $('#bth-download').text('下载');
+            $("#bth-download").removeAttr("disabled",false);
+        },5000)
+
+
+    }
+</script>
 
 <div class="row userinfo" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="col-md-3"><a   th:text="'客户姓名：' + ${invtCashGuideDO.realName}"></a ></div>
@@ -40,6 +74,10 @@
     <div class="col-md-3"><a  th:text="'剩余充值本金：' + ${invtCashGuideDO.biOriginalCapital} + ' 元'"></a ></div>
     <div class="col-md-3"><a  th:text="'匹配债权金额：' + ${invtCashGuideDO.biDebtCapitalSum} + ' 元'"></a ></div>
     <div class="col-md-3"><a  th:text="'匹配债权金额(八折)：' + ${invtCashGuideDO.biDebtCapitalSumEight} + ' 元'"></a ></div>
+
+    <div class="col-md-3">
+        <button  id="bth-download" class="btn btn-primary" onclick=" download() ">下载</button>
+    </div>
 <!--    <h1 align="center" th:text="'剩余充值本金：' + ${invtCashGuideDO.biOriginalCapital} + ' 元'"></h1>-->
 </div>
 <hr>

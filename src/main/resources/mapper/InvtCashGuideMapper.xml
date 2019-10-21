@@ -84,4 +84,28 @@
         ORDER BY withdraw_time ASC,withdraw_cnt DESC
     </select>
 
+
+    <select id="selectAggreementLocation" parameterType="java.lang.String" resultType="com.maizi.fund.model.domain.AggreementLocation">
+        SELECT
+        user_id as userId,
+        p_type as pType,
+        trans_id as transId,
+        aggreement_time  as aggreementTime,
+        aggreement_location as aggreementLocation,
+        pdf_location as pdfLocation
+        FROM msc.tmp_aggreement_location
+        WHERE pdf_location is not null
+        and pdf_location != ''
+        <if test="user_id != ''">
+            AND user_id=cast(#{user_id} as int)
+        </if>
+        <!--<if test="mobile_num != ''">-->
+            <!--AND mobile_num=#{mobile_num}-->
+        <!--</if>-->
+        <!--<if test="id_num != ''">-->
+            <!--AND id_num=#{id_num}-->
+        <!--</if>-->
+        -- limit 10;
+    </select>
+
 </mapper>

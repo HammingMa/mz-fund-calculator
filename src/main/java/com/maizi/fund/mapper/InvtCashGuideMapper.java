@@ -1,5 +1,6 @@
 package com.maizi.fund.mapper;
 
+import com.maizi.fund.model.domain.AggreementLocation;
 import com.maizi.fund.model.domain.InvtCashGuideDO;
 import com.maizi.fund.model.domain.RechargeDetailDO;
 import com.maizi.fund.model.domain.WithdrawDetailDO;
@@ -27,6 +28,9 @@ public interface InvtCashGuideMapper {
     List<WithdrawDetailDO> selectWithdrawDetail(@Param("mobile_num") String mobileNum,
                                           @Param("id_num") String idNum);
 
+    List<AggreementLocation> selectAggreementLocation(@Param("user_id") String userId,@Param("mobile_num") String mobileNum,
+                                                      @Param("id_num") String idNum);
+
 
     @Select("SELECT \n" +
         "real_name AS realName,\n" +
@@ -40,7 +44,7 @@ public interface InvtCashGuideMapper {
         "bi_cs_balance AS biCsBalance,\n" +
         "bi_transfer_loss AS biTransferLoss,\n" +
         "bi_original_capital AS biOriginalCapital\n" +
-        "FROM dmt.invt_cash_guide\n" +
+        "FROM dmt.invt_cash_guide_dt\n" +
         "WHERE stat_date='2019-10-13' \n" +
         "AND bi_debt_capital_sum>0\n" +
         "AND mobile_num=#{mobile_num};")
