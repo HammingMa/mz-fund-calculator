@@ -39,8 +39,8 @@
 --         FROM dmt.invt_cash_guide
 --         WHERE stat_date='2019-10-14'
 --         AND bi_debt_capital_sum>0
-        FROM dmt.invt_cash_guide_dt a INNER JOIN (SELECT MAX(stat_date) AS stat_date FROM dmt.invt_cash_guide_dt ) b
-        on a.stat_date=b.stat_date
+        FROM dmt.invt_cash_guide_dt a
+        where a.stat_date=#{select_time}
         <if test="mobile_num != ''">
             AND mobile_num=#{mobile_num}
         </if>
@@ -56,7 +56,7 @@
         recharge_time AS rechargeTime,
         recharge_amount AS rechargeAmount
         FROM dmt.recharhe_detail
-        WHERE 1=1
+        WHERE recharge_time &lt;= concat(#{select_time},' 23:59:59')
         <if test="mobile_num != ''">
             AND mobile_num=#{mobile_num}
         </if>
@@ -74,7 +74,7 @@
         withdraw_time AS withdrawTime,
         withdraw_amount AS withdrawAmount
         FROM dmt.withdraw_detail
-        WHERE 1=1
+        WHERE withdraw_time &lt;= concat(#{select_time},' 23:59:59')
         <if test="mobile_num != ''">
             AND mobile_num=#{mobile_num}
         </if>

@@ -6,7 +6,7 @@ public class AggreementLocation {
     private String pType;
     private String transId;
     private String aggreementTime ;
-    private String aggreementTocation;
+    private String aggreementLocation;
     private String pdfLocation;
 
     public String getUserId() {
@@ -41,12 +41,12 @@ public class AggreementLocation {
         this.aggreementTime = aggreementTime;
     }
 
-    public String getAggreementTocation() {
-        return aggreementTocation;
+    public String getAggreementLocation() {
+        return aggreementLocation;
     }
 
-    public void setAggreementTocation(String aggreementTocation) {
-        this.aggreementTocation = aggreementTocation;
+    public void setAggreementLocation(String aggreementTocation) {
+        this.aggreementLocation = aggreementTocation;
     }
 
     public String getPdfLocation() {
@@ -64,7 +64,7 @@ public class AggreementLocation {
                 ", pType='" + pType + '\'' +
                 ", transId='" + transId + '\'' +
                 ", aggreementTime='" + aggreementTime + '\'' +
-                ", aggreementTocation='" + aggreementTocation + '\'' +
+                ", aggreementTocation='" + aggreementLocation + '\'' +
                 ", pdfLocation='" + pdfLocation + '\'' +
                 '}';
     }

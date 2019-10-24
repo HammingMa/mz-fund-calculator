@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.maizi.fund.mapper.InvtCashGuideMapper;
+import com.maizi.fund.model.domain.AggreementLocation;
 import com.maizi.fund.model.domain.InvtCashGuideDO;
 import com.maizi.fund.model.domain.RechargeDetailDO;
 import com.maizi.fund.model.domain.WithdrawDetailDO;
@@ -46,16 +47,18 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
     private InvtCashGuideMapper invtCashGuideMapper;
 
 
-    @Override
-    public InvtCashGuideDO selectIvt(String mobileNum, String idNum) {
 
-        String key = mobileNum.isEmpty()?idNum:mobileNum;
+
+    @Override
+    public InvtCashGuideDO selectIvt(String mobileNum, String idNum,String selectTime) {
+
+        String key = (mobileNum.isEmpty()?idNum:mobileNum)+selectTime;
 
 
         InvtCashGuideDO invtCashGuideDO = userInfoCache.getIfPresent(key);
 
         if(invtCashGuideDO == null){
-            invtCashGuideDO = invtCashGuideMapper.selectIvt(mobileNum, idNum);
+            invtCashGuideDO = invtCashGuideMapper.selectIvt(mobileNum, idNum,selectTime);
             if(invtCashGuideDO != null) {
                 userInfoCache.put(key, invtCashGuideDO);
             }
@@ -67,14 +70,14 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
     }
 
     @Override
-    public List<RechargeDetailDO> selectRechargeDetail(String mobileNum, String idNum) {
+    public List<RechargeDetailDO> selectRechargeDetail(String mobileNum, String idNum,String selectTime) {
 
-        String key = mobileNum.isEmpty()?idNum:mobileNum;
+        String key = (mobileNum.isEmpty()?idNum:mobileNum)+selectTime;
 
         List<RechargeDetailDO>  rechargeDetail = rechargeDetailCache.getIfPresent(key);
 
         if(rechargeDetail==null){
-            rechargeDetail=invtCashGuideMapper.selectRechargeDetail(mobileNum, idNum);
+            rechargeDetail=invtCashGuideMapper.selectRechargeDetail(mobileNum, idNum,selectTime);
             if(rechargeDetail!= null) {
                 rechargeDetailCache.put(key, rechargeDetail);
             }
@@ -84,14 +87,14 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
     }
 
     @Override
-    public List<WithdrawDetailDO> selectWithdrawDetail(String mobileNum, String idNum) {
+    public List<WithdrawDetailDO> selectWithdrawDetail(String mobileNum, String idNum,String selectTime) {
 
-        String key = mobileNum.isEmpty()?idNum:mobileNum;
+        String key = (mobileNum.isEmpty()?idNum:mobileNum)+selectTime;
 
         List<WithdrawDetailDO> withdrawDetail = withdrawDetailCache.getIfPresent(key);
 
         if(withdrawDetail==null){
-            withdrawDetail=invtCashGuideMapper.selectWithdrawDetail(mobileNum, idNum);
+            withdrawDetail=invtCashGuideMapper.selectWithdrawDetail(mobileNum, idNum,selectTime);
             if(withdrawDetail != null) {
                 withdrawDetailCache.put(key, withdrawDetail);
             }
@@ -100,6 +103,13 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
 
         return withdrawDetail;
     }
+
+
+    @Override
+    public  List<AggreementLocation> selectAggreementLocations(String userId, String mobileNum, String idNum){
+        return invtCashGuideMapper.selectAggreementLocation(userId,mobileNum,idNum);
+    }
+
 
     @Override
     public HSSFWorkbook createAllInfoExcel(String mobileNum, String idNum){
@@ -122,18 +132,19 @@ public class InvtCashGuideServiceImpl implements InvtCashGuideService {
 
         //设置用户详情页
         HSSFSheet userInfoSheet = workbook.createSheet("用户详情");// 新建sheet页
-        InvtCashGuideDO invtCashGuideDO = selectIvt(mobileNum, idNum);
+
+        InvtCashGuideDO invtCashGuideDO = selectIvt(mobileNum, idNum,"8787979889797");
         setUserInfo(userInfoSheet,cellStyle,invtCashGuideDO);
 
 
         //设置用户充值明细页
         HSSFSheet rechargeDetailSheet = workbook.createSheet("历史充值明细");
-        List<RechargeDetailDO> rechargeDetailDOS = selectRechargeDetail(mobileNum, idNum);
+        List<RechargeDetailDO> rechargeDetailDOS = selectRechargeDetail(mobileNum, idNum,"8787979889797");
         setRechargeDetail(rechargeDetailSheet,cellStyle,rechargeDetailDOS);
 
         //设置用户提现明细页
         HSSFSheet withdrawDetailSheet = workbook.createSheet("历史提现明细");
-        List<WithdrawDetailDO> withdrawDetailDOS = selectWithdrawDetail(mobileNum, idNum);
+        List<WithdrawDetailDO> withdrawDetailDOS = selectWithdrawDetail(mobileNum, idNum,"8787979889797");
         setWithdrawDetail(withdrawDetailSheet,cellStyle,withdrawDetailDOS);
 
         // 输出到本地

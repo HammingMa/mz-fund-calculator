@@ -32,9 +32,11 @@
 
         var search_word_tel = $('#search_word_tel').val();
         var id_card = $('#id_card').val();
+        var select_time=$.trim($('#select_time').val());
+
         var link = document.createElement('a')
         link.style.display = 'none'
-        link.href = "/mz/fund/download?mobile_num=" + search_word_tel + "&id_num=" + id_card
+        link.href = "/mz/fund/download?mobile_num=" + search_word_tel + "&id_num=" + id_card+ "&select_time="+select_time
         link.setAttribute('id', 'downloadLink')
         link.setAttribute('download', 'aa')
         document.body.appendChild(link)

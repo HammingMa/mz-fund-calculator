@@ -19,14 +19,17 @@ import java.util.List;
 public interface InvtCashGuideMapper {
 
     InvtCashGuideDO selectIvt(@Param("mobile_num") String mobileNum,
-                              @Param("id_num") String idNum);
+                              @Param("id_num") String idNum,
+                              @Param("select_time") String selectTime);
 
     List<RechargeDetailDO> selectRechargeDetail(@Param("mobile_num") String mobileNum,
-                                          @Param("id_num") String idNum);
+                                          @Param("id_num") String idNum,
+                                                @Param("select_time") String selectTime);
 
 
     List<WithdrawDetailDO> selectWithdrawDetail(@Param("mobile_num") String mobileNum,
-                                          @Param("id_num") String idNum);
+                                          @Param("id_num") String idNum,
+                                                @Param("select_time") String selectTime);
 
     List<AggreementLocation> selectAggreementLocation(@Param("user_id") String userId,@Param("mobile_num") String mobileNum,
                                                       @Param("id_num") String idNum);

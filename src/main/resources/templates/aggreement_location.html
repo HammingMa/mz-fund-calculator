@@ -1,0 +1,85 @@
+<!--<a class="margin"  th:text="'客户姓名：' + ${invtCashGuideDO.realName}"></a>-->
+<!--<a class="margin" th:text="'注册时间：' + ${invtCashGuideDO.registerTime}"></a>-->
+<!--<a class="margin" th:text="'充值笔数：' + ${invtCashGuideDO.rechargeCnt}"></a><br/>-->
+<!--<a class="margin2" th:text="'充值金额：' + ${invtCashGuideDO.biRechargeSum}"></a>-->
+<!--<a class="margin2" th:text="'提现笔数：' + ${invtCashGuideDO.withdrawCnt}"></a>-->
+<!--<a id="mm2" class="margin2" th:text="'提现总额：' + ${invtCashGuideDO.biWithdrawSum}"></a><br/>-->
+<!--<a class="margin3" th:text="'当前余额：' + ${invtCashGuideDO.biSevenBalance}"></a>-->
+<!--<a id="mm3" class="margin3" th:text="'当前精选余额：' + ${invtCashGuideDO.biThirteenBalance}"></a>-->
+<!--<a id="mm4" class="margin3" th:text="'财神原账户：' + ${invtCashGuideDO.biCsBalance}"></a><br/>-->
+<!--<a class="margin" th:text="'转让折扣损失加总：' + ${invtCashGuideDO.biTransferLoss}"></a><br/>-->
+<!--<h1 id="mm5" align="center" th:text="'原始本金：' + ${invtCashGuideDO.biOriginalCapital}"></h1>-->
+<style>
+    .userinfo div {
+        padding:0 !important;
+    }
+
+    #bth-download {
+        /*padding:2px;*/
+        float:right;
+        margin-right:25px;
+    }
+</style>
+
+<script>
+    function download(){
+
+        $('#bth-download').text('下载中···');
+        $("#bth-download").prop("disabled", true);
+
+        var search = {};
+        var search_word = $('#search_word').val();
+
+        var search_word_tel = $('#search_word_tel').val();
+        var id_card = $('#id_card').val();
+        var link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = "/mz/fund/serchAggreementLocation?mobile_num=" + search_word_tel + "&id_num=" + id_card
+        link.setAttribute('id', 'downloadLink')
+        link.setAttribute('download', 'aa')
+        document.body.appendChild(link)
+        link.click()
+        var objLink = document.getElementById('downloadLink')
+        document.body.removeChild(objLink)
+        setTimeout(function() {
+            $('#bth-download').text('下载');
+            $("#bth-download").removeAttr("disabled",false);
+        },5000)
+
+
+    }
+</script>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="contentDiv">
+            <h4 align="center">债转协议详细列表</h4>
+            <table class="table table-striped table-hover">
+                <thead style="background-color: #ebac3c">
+                <tr>
+                    <th style="color: aliceblue">类型</th>
+                    <th style="color: aliceblue">流水号</th>
+                    <th style="color: aliceblue">时间</th>
+                    <th style="color: aliceblue">地址</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="aggreementLocation : ${aggreementLocations}">
+                    <td th:text="${aggreementLocation.pType}"></td>
+                    <td th:text="${aggreementLocation.transId}"></td>
+                    <td th:text="${aggreementLocation.aggreementTime}"></td>
+                    <td >
+                        <a th:href="${aggreementLocation.aggreementLocation}">协议</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

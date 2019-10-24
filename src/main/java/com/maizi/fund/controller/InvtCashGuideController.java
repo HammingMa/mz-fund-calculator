@@ -44,9 +44,10 @@ public class InvtCashGuideController {
     @PostMapping("/fund/search")
     public String getEmployeeById(ModelMap map,
                                   @RequestParam(name = "mobile_num", required = true) String mobileNum,
-                                  @RequestParam(name = "id_num", required = true) String idNum) {
+                                  @RequestParam(name = "id_num", required = true) String idNum,
+                                  @RequestParam(name = "select_time", required = true) String selectTime) {
 
-        InvtCashGuideDO invtCashGuideDO = invtCashGuideService.selectIvt(mobileNum, idNum);
+        InvtCashGuideDO invtCashGuideDO = invtCashGuideService.selectIvt(mobileNum, idNum,selectTime);
 
         System.out.println("44444" + invtCashGuideDO);
 
@@ -54,8 +55,8 @@ public class InvtCashGuideController {
             return "no_result";
         }
 
-        List<RechargeDetailDO> rechargeDetailDoList = invtCashGuideService.selectRechargeDetail(mobileNum, idNum);
-        List<WithdrawDetailDO> withdrawDetailDoList = invtCashGuideService.selectWithdrawDetail(mobileNum, idNum);
+        List<RechargeDetailDO> rechargeDetailDoList = invtCashGuideService.selectRechargeDetail(mobileNum, idNum,selectTime);
+        List<WithdrawDetailDO> withdrawDetailDoList = invtCashGuideService.selectWithdrawDetail(mobileNum, idNum,selectTime);
 
         map.addAttribute("invtCashGuideDO", invtCashGuideDO);
         map.addAttribute("rechargeDetailDoList", rechargeDetailDoList);
@@ -64,6 +65,8 @@ public class InvtCashGuideController {
         System.out.println(invtCashGuideDO);
         return "result_div";
     }
+
+
 
     @GetMapping("/fund/download")
     @ResponseBody

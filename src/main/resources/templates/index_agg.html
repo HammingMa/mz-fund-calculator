@@ -19,42 +19,13 @@
 
     <script>
         $(document).ready(function(){
-
-
-            // var end_day = new Date();
-            // alert(day.getDate()+10);
-            // day.setDate(day.getDate()-30)
-            // alert(day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate());
-
-            var start_day= new Date("2019-10-15");
-            var day = new Date();
-            var end_day = new Date(day.getFullYear()+ "-" + (day.getMonth()+ 1) + "-" + day.getDate());
-
-            var diff_day = (end_day-start_day)/(1000 * 60 * 60 * 24);
-
-            //alert(diff_day);
-
-            for(var i =0;i < diff_day;i++){
-                day.setDate(day.getDate()-1);
-                var day_str=day.getFullYear() + '-' + (day.getMonth()+ 1) + '-' + day.getDate();
-                //alert(day_str);
-                $("#select_time").append("<option value='"+day_str+"'> "+day_str+" </option>");
-
-            }
-
-
-
-
-
-
             $('#search-form').submit(function(event){
 
                 var search_word_tel_length = $.trim($('#search_word_tel').val()).length;
                 var id_card_length = $.trim($('#id_card').val()).length;
+                var user_id_length = $.trim($('#user_id').val()).length;
 
-                //alert($.trim($('#select_time').val()))
-
-                if (search_word_tel_length===0 && id_card_length===0) {
+                if (search_word_tel_length===0 && id_card_length===0 && user_id_length === 0) {
                     alert("请输入用户名手机号或身份证号");
                     return false;
                 }
@@ -76,15 +47,14 @@
 
             var search_word_tel = $('#search_word_tel').val();
             var id_card = $('#id_card').val();
-
-            var select_time=$.trim($('#select_time').val());
+            var user_id = $('#user_id').val();
 
             // alert(search_word_tel);
             $.ajax({
                 type: 'POST',
                 contentType: "application/json",
                 // url: "/api/search",
-                url: "/mz/fund/search?mobile_num=" + search_word_tel + "&id_num=" + id_card+ "&select_time="+select_time,
+                url: "/mz1/fund/serchAggreementLocation?user_id="+user_id+"&mobile_num=" + search_word_tel + "&id_num=" + id_card,
                 beforeSend: function(){
                     $('#bth-search').text('查询中···');
                     // $("#btn-search").prop("disabled", false);
@@ -173,21 +143,11 @@
 
             <div class="row">
 <!--                <div class="form-group form-group-lg col-md-3">-->
-                <!--<div class="container col-md-4">-->
-                    <!--<div class="row">-->
-                        <!--<a>用户名</a>-->
-                        <!--<div class="col-md-9">-->
-                            <!--<input type="text" class="form-control" id="search_word"/>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-
                 <div class="container col-md-4">
                     <div class="row">
-                        <a>日期</a>
+                        <a>userId</a>
                         <div class="col-md-9">
-                           <select id="select_time">
-                           </select>
+                            <input type="text" class="form-control" id="user_id"/>
                         </div>
                     </div>
                 </div>
