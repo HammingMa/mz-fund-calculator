@@ -68,13 +68,16 @@ public class InvtCashGuideController {
 
 
 
+
+
     @GetMapping("/fund/download")
     @ResponseBody
     public String getDownloadExcel(ModelMap map,
                                    @RequestParam(name = "mobile_num", required = true) String mobileNum,
-                                   @RequestParam(name = "id_num", required = true) String idNum) {
+                                   @RequestParam(name = "id_num", required = true) String idNum,
+                                   @RequestParam(name = "select_time", required = true) String selectTime) {
 
-        HSSFWorkbook allInfoExcel = invtCashGuideService.createAllInfoExcel(mobileNum, idNum);
+        HSSFWorkbook allInfoExcel = invtCashGuideService.createAllInfoExcel(mobileNum, idNum,selectTime);
 
         String fileName = mobileNum.isEmpty()?idNum:mobileNum;
 

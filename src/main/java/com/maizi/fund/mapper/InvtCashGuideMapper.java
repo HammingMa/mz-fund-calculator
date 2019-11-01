@@ -31,8 +31,7 @@ public interface InvtCashGuideMapper {
                                           @Param("id_num") String idNum,
                                                 @Param("select_time") String selectTime);
 
-    List<AggreementLocation> selectAggreementLocation(@Param("user_id") String userId,@Param("mobile_num") String mobileNum,
-                                                      @Param("id_num") String idNum);
+    List<AggreementLocation> selectAggreementLocation(@Param("user_id") String userId,@Param("mobile_num") String mobileNum);
 
 
     @Select("SELECT \n" +

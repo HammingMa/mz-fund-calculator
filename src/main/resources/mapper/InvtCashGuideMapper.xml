@@ -40,6 +40,7 @@
 --         WHERE stat_date='2019-10-14'
 --         AND bi_debt_capital_sum>0
         FROM dmt.invt_cash_guide_dt a
+        --FROM odsopr_backup.fact_invt_cash_guide_tech_snapshot a
         where a.stat_date=#{select_time}
         <if test="mobile_num != ''">
             AND mobile_num=#{mobile_num}
@@ -92,12 +93,21 @@
         trans_id as transId,
         aggreement_time  as aggreementTime,
         aggreement_location as aggreementLocation,
-        pdf_location as pdfLocation
+        pdf_location as pdfLocation,
+        mobile_num as mobileNum,
+        original_price as originalPrice,
+        price as price,
+        lock_price as lockPrice	,
+        transfer_price as transferPrice,
+        repay_price as repayPrice
         FROM msc.tmp_aggreement_location
         WHERE pdf_location is not null
         and pdf_location != ''
         <if test="user_id != ''">
             AND user_id=cast(#{user_id} as int)
+        </if>
+        <if test="mobile_num != ''">
+            AND mobile_num=#{mobile_num}
         </if>
         <!--<if test="mobile_num != ''">-->
             <!--AND mobile_num=#{mobile_num}-->
@@ -105,7 +115,6 @@
         <!--<if test="id_num != ''">-->
             <!--AND id_num=#{id_num}-->
         <!--</if>-->
-        -- limit 10;
     </select>
 
 </mapper>

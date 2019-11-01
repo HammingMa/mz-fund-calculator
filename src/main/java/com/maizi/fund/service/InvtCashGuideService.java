@@ -26,7 +26,9 @@ public interface InvtCashGuideService {
     List<WithdrawDetailDO> selectWithdrawDetail(String mobileNum,
                                                 String idNum,String selectTime);
 
-    HSSFWorkbook createAllInfoExcel(String mobileNum, String idNum);
+    HSSFWorkbook createAllInfoExcel(String mobileNum, String idNum,String selectTime);
 
     List<AggreementLocation> selectAggreementLocations(String userId,String mobileNum, String idNum);
+
+    HSSFWorkbook createAggreementLocationExcel(String userId,String mobileNum, String idNum);
 }
